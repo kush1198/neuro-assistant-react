@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
 import ToDoTask from '../components/ToDoTask';
+import { CredentialsContext } from './HomeScreen';
 
 const ToDoScreen = () => {
     const [task, setTask] = useState();
     const [taskItems, setTaskItems] = useState([]);
-  
+    const [cred] = useContext(CredentialsContext);
+
     const handleAddTask = () => {
       Keyboard.dismiss();
       setTaskItems([...taskItems, task])
@@ -29,6 +31,7 @@ const ToDoScreen = () => {
         >
   
         <View style={styles.tasksWrapper}>
+          <Text>{cred.username}</Text>
           <Text style={styles.sectionTitle}>Today's tasks</Text>
           <View style={styles.items}>
             {

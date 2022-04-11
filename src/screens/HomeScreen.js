@@ -1,34 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Text, StyleSheet, View, Button, TouchableOpacity } from 'react-native';
+export const CredentialsContext = React.createContext([{}, function(){}]);
 
 const HomeScreen = ({ navigation }) => {
+  const credentialsState = useState({username: "yolo", password:null});
   return (
     <View>
-      <Text style={styles.text}>Hi there!</Text>
-      <Button
-        onPress={() => navigation.navigate('Components')}
-        title="Go to Components Demo"
-      />
-      <Button
-        onPress={() => navigation.navigate('Counter')}
-        title="Go to Counter"
-      />
-      <Button
-        title="Go to List Demo"
-        onPress={() => navigation.navigate('List')}
-      />
-      <Button
-        title="Go to Image Demo"
-        onPress={() => navigation.navigate('Image')}
-      />
-      <Button
-        title="Go to Color Screen"
-        onPress={() => navigation.navigate('Color')}
-      />
+      <CredentialsContext.Provider value={credentialsState}>
+        <Text style={styles.text}>Hi there!</Text>
         <Button
-        title="Go to ToDo Screen"
-        onPress={() => navigation.navigate('ToDo')}
-      />
+          onPress={() => navigation.navigate('Components')}
+          title="Go to Components Demo"
+        />
+        <Button
+          onPress={() => navigation.navigate('Counter')}
+          title="Go to Counter"
+        />
+        <Button
+          title="Go to List Demo"
+          onPress={() => navigation.navigate('List')}
+        />
+        <Button
+          title="Go to Image Demo"
+          onPress={() => navigation.navigate('Image')}
+        />
+        <Button
+          title="Go to Color Screen"
+          onPress={() => navigation.navigate('Color')}
+        />
+        <Button
+          title="Go to ToDo Screen"
+          onPress={() => navigation.navigate('ToDo')}
+        />
+        <Button
+          title="Go to Register Screen"
+          onPress={() => navigation.navigate('Register')}
+        />
+      </CredentialsContext.Provider>
     </View>
   );
 };
