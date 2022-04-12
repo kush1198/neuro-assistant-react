@@ -1,11 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { CredentialsContext } from './HomeScreen';
-import { MonthDateYearField } from 'react-native-datefield';
-
 
 export const handleErrors = async (response) => {
-    console.log()
     if (!response.ok) {
       const { message } = await response.json();
       throw Error(message);
@@ -13,20 +10,15 @@ export const handleErrors = async (response) => {
     return response.json();
   };
 
-const RegisterScreen = () => {
+const LoginScreen = ({ navigation }) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [email, setEmail] = useState('')
     const [error, setError] = useState("");
     const [, setCredentials] = useContext(CredentialsContext);
 
-    const handleLogin = () => {
-        console.log(username)
-    }
-
-    const handleSignUp = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
-        fetch(`http://192.168.0.36:4000/register`, {
+        fetch(`http://192.168.0.36:4000/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -42,6 +34,7 @@ const RegisterScreen = () => {
               username,
               password
             });
+            
           })
           .catch((err) => {
             setError(err.message);
@@ -56,12 +49,6 @@ const RegisterScreen = () => {
         <View style={styles.inputContainer}>
             {error!=="" && <Text style={{ color: "red" }}>{error}</Text>}
             <TextInput
-                placeholder="Email"
-                value={email}
-                onChangeText={text => setEmail(text)}
-                style={styles.input}
-            />
-            <TextInput
                 placeholder="Username"
                 value={username}
                 onChangeText={text => setUsername(text)}
@@ -74,27 +61,26 @@ const RegisterScreen = () => {
                 style={styles.input}
                 secureTextEntry
             />
-            <MonthDateYearField
-                labelDate='Enter date'
-                labelMonth='Enter month'
-                labelYear='Enter year'
-                containerStyle={styles.containerStyle}
-                onSubmit={(value) => console.log('MonthDateYearField', value)}
-            />
         </View>
         <View style={styles.buttonContainer}>
             <TouchableOpacity
-                onPress={handleSignUp}
+                onPress={handleLogin}
+                style={styles.button}
+            >
+            <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Register')}
                 style={[styles.button, styles.buttonOutline]}
             >
-            <Text style={styles.buttonOutlineText}>Sign Up</Text>
+            <Text style={styles.buttonOutlineText}>Register</Text>
             </TouchableOpacity>
         </View>
         </KeyboardAvoidingView>
     )
 }
 
-export default RegisterScreen
+export default LoginScreen
 
 const styles = StyleSheet.create({
 container: {
@@ -140,11 +126,5 @@ buttonOutlineText: {
     color: '#0782F9',
     fontWeight: '700',
     fontSize: 16,
-},containerStyle: {
-    backgroundColor: 'white',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 10,
-    marginTop: 5,
-  },
+},
 })

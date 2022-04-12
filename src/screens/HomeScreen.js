@@ -33,8 +33,8 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => navigation.navigate('ToDo')}
         />
         <Button
-          title="Go to Register Screen"
-          onPress={() => navigation.navigate('Register')}
+          title="Go to Login Screen"
+          onPress={() => navigation.navigate('Login')}
         />
       </CredentialsContext.Provider>
     </View>
