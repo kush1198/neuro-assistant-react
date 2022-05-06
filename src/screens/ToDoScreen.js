@@ -1,23 +1,53 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
 import ToDoTask from '../components/ToDoTask';
-import { CredentialsContext } from './HomeScreen';
+import { CredentialsContext } from '../../route';
+import { v4 as uuidv4 } from "uuid";
+
 
 const ToDoScreen = () => {
-    const [task, setTask] = useState();
+    const [task, setTask] = useState("");
     const [taskItems, setTaskItems] = useState([]);
-    const [cred] = useContext(CredentialsContext);
+    const creds = useContext(CredentialsContext);
+
+    const persist = (newTodos) => {
+      fetch(`http://192.168.0.30:4000/todos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${creds.username}:${creds.password}`,
+        },
+        body: JSON.stringify(newTodos)
+      }).then(() => {});
+    };
+
+    useEffect(() => {
+      fetch(`http://192.168.0.30:4000/todos`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${creds.username}:${creds.password}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((todos) => {
+          console.warn('in')
+          setTaskItems(todos);
+        });
+    }, []);
 
     const handleAddTask = () => {
       Keyboard.dismiss();
-      setTaskItems([...taskItems, task])
-      setTask(null);
+      const newTodo = { id: uuidv4(), text: task };
+      setTaskItems([...taskItems, newTodo])
+      setTask("");
+      persist(taskItems);
     }
   
     const completeTask = (index) => {
-      let itemsCopy = [...taskItems];
-      itemsCopy.splice(index, 1);
+      let itemsCopy = taskItems.filter(task => task.id != index);
       setTaskItems(itemsCopy)
+      persist(taskItems);
     }
   
     return (
@@ -31,14 +61,13 @@ const ToDoScreen = () => {
         >
   
         <View style={styles.tasksWrapper}>
-          <Text>{cred.username}</Text>
-          <Text style={styles.sectionTitle}>Today's tasks</Text>
+          <Text style={styles.sectionTitle}>Today's tasks for {creds.username} with password: {creds.password}</Text>
           <View style={styles.items}>
             {
-              taskItems.map((item, index) => {
+              taskItems.map((todo) => {
                 return (
-                  <TouchableOpacity key={index}  onPress={() => completeTask(index)}>
-                    <ToDoTask text={item} /> 
+                  <TouchableOpacity key={todo.id}  onPress={() => completeTask(todo.id)}>
+                    <ToDoTask text={todo.text} /> 
                   </TouchableOpacity>
                 )
               })

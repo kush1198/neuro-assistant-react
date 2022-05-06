@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { CredentialsContext } from './HomeScreen';
+import { CredentialsContext } from '../../route';
 import { MonthDateYearField } from 'react-native-datefield';
 
 
 export const handleErrors = async (response) => {
-    console.log()
     if (!response.ok) {
       const { message } = await response.json();
       throw Error(message);
@@ -26,7 +25,7 @@ const RegisterScreen = () => {
 
     const handleSignUp = (e) => {
         e.preventDefault();
-        fetch(`http://192.168.0.36:4000/register`, {
+        fetch(`http://192.168.0.30:4000/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

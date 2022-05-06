@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
 import { Text, StyleSheet, View, Button, TouchableOpacity } from 'react-native';
-export const CredentialsContext = React.createContext([{}, function(){}]);
-
 const HomeScreen = ({ navigation }) => {
-  const credentialsState = useState({username: "yolo", password:null});
+
   return (
     <View>
-      <CredentialsContext.Provider value={credentialsState}>
         <Text style={styles.text}>Hi there!</Text>
         <Button
           onPress={() => navigation.navigate('Components')}
@@ -36,7 +33,6 @@ const HomeScreen = ({ navigation }) => {
           title="Go to Login Screen"
           onPress={() => navigation.navigate('Login')}
         />
-      </CredentialsContext.Provider>
     </View>
   );
 };

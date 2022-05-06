@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { CredentialsContext } from './HomeScreen';
+import { CredentialsContext } from '../../route';
 
 export const handleErrors = async (response) => {
     if (!response.ok) {
@@ -14,11 +14,11 @@ const LoginScreen = ({ navigation }) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState("");
-    const [, setCredentials] = useContext(CredentialsContext);
+    const creds = useContext(CredentialsContext);
 
     const handleLogin = (e) => {
         e.preventDefault();
-        fetch(`http://192.168.0.36:4000/login`, {
+        fetch(`http://192.168.0.30:4000/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -30,11 +30,10 @@ const LoginScreen = ({ navigation }) => {
         })
           .then(handleErrors)
           .then(() => {
-            setCredentials({
-              username,
-              password
-            });
-            
+            //onsole.warn(username);
+            creds.setterU(username);
+            creds.setterP(password);
+            console.warn(creds.password)
           })
           .catch((err) => {
             setError(err.message);
