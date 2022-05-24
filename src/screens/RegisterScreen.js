@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { CredentialsContext } from '../../route';
+import { CredentialsContext } from '../../tabNavigator';
 import { MonthDateYearField } from 'react-native-datefield';
-
+ import { auth,db } from '../../Firebase/firebase';
+import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
+import { collection, doc, setDoc } from 'firebase/firestore';
 
 export const handleErrors = async (response) => {
     if (!response.ok) {
@@ -17,7 +19,7 @@ const RegisterScreen = () => {
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
     const [error, setError] = useState("");
-    const [, setCredentials] = useContext(CredentialsContext);
+    const creds = useContext(CredentialsContext);
 
     const handleLogin = () => {
         console.log(username)
@@ -25,27 +27,23 @@ const RegisterScreen = () => {
 
     const handleSignUp = (e) => {
         e.preventDefault();
-        fetch(`http://192.168.0.30:4000/register`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username,
-            password,
-          }),
-        })
-          .then(handleErrors)
-          .then(() => {
-            setCredentials({
-              username,
-              password
-            });
-          })
+        createUserWithEmailAndPassword(auth,email, password).then((cred)=>{
+            setDoc(doc(db, "users", cred.user.uid), {
+                Name: username,
+                Email: email,
+                Password: password
+            }).then(()=>{
+                setUsername('');
+                setEmail('');
+                setPassword('');
+                setError('');
+            })
           .catch((err) => {
             setError(err.message);
-          });
-      };
+            console.log(Error)
+          }).catch(err=>setError(err.message));
+        });
+    }
 
     return (
         <KeyboardAvoidingView
@@ -61,7 +59,7 @@ const RegisterScreen = () => {
                 style={styles.input}
             />
             <TextInput
-                placeholder="Username"
+                placeholder="Name"
                 value={username}
                 onChangeText={text => setUsername(text)}
                 style={styles.input}
@@ -91,7 +89,7 @@ const RegisterScreen = () => {
         </View>
         </KeyboardAvoidingView>
     )
-}
+};
 
 export default RegisterScreen
 

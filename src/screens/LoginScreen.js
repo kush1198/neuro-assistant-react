@@ -1,6 +1,10 @@
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useEffect, useState, useContext } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { CredentialsContext } from '../../route';
+import { CredentialsContext } from '../../tabNavigator';
+import { auth,db } from '../../Firebase/firebase';
+import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
+import { collection, doc, setDoc } from 'firebase/firestore';
 
 export const handleErrors = async (response) => {
     if (!response.ok) {
@@ -11,33 +15,21 @@ export const handleErrors = async (response) => {
   };
 
 const LoginScreen = ({ navigation }) => {
-    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState("");
     const creds = useContext(CredentialsContext);
-
     const handleLogin = (e) => {
-        e.preventDefault();
-        fetch(`http://192.168.0.30:4000/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username,
-            password,
-          }),
-        })
-          .then(handleErrors)
-          .then(() => {
-            //onsole.warn(username);
-            creds.setterU(username);
-            creds.setterP(password);
-            console.warn(creds.password)
-          })
-          .catch((err) => {
-            setError(err.message);
-          });
+          e.preventDefault();
+          signInWithEmailAndPassword(auth,email, password).then((cred)=>{
+                creds.setterU(email);
+                creds.setterP(password);
+                console.warn(creds.password)
+              })
+            .catch((err) => {
+                setError(err.message);
+                console.log(Error)
+            })
       };
 
     return (
@@ -48,9 +40,9 @@ const LoginScreen = ({ navigation }) => {
         <View style={styles.inputContainer}>
             {error!=="" && <Text style={{ color: "red" }}>{error}</Text>}
             <TextInput
-                placeholder="Username"
-                value={username}
-                onChangeText={text => setUsername(text)}
+                placeholder="Email"
+                value={email}
+                onChangeText={text => setEmail(text)}
                 style={styles.input}
             />
             <TextInput

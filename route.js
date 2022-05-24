@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-
 import HomeScreen from './src/screens/HomeScreen';
 import ComponentsScreen from './src/screens/ComponentsScreen';
 import ListScreen from './src/screens/ListScreen';
@@ -11,19 +10,18 @@ import ColorScreen from './src/screens/ColorScreen';
 import ToDoScreen from './src/screens/ToDoScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import LoginScreen from './src/screens/LoginScreen';
-
-export const CredentialsContext = React.createContext();
-
+import NeurosenseScreen from './src/screens/NeurosenseScreen';
+import HandsScreen2 from './src/screens/neuroScreens/hands1';
+import HandsScreen3 from './src/screens/neuroScreens/hands3';
+import TimePC from './src/screens/TimePicker';
+import MoodBoard from './src/screens/MoodBoard';
 const Stack = createStackNavigator();
 
 export default function Navigator() {
-  const [user, setUser] = useState('temp');
-  const [pass, setPass] = useState('temp');
-  const users = {'username': user, 'setterU': setUser, 'password':pass,'setterP':setPass}
     return (
-      <CredentialsContext.Provider value={users}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName='Home'>
+          <Stack.Navigator initialRouteName='Home' screenOptions={{
+            cardStyle: { backgroundColor: '#fff' }
+          }}>
             <Stack.Screen name='Home' component={HomeScreen} />
             <Stack.Screen name='Screen' component={ComponentsScreen} />
             <Stack.Screen name='List' component={ListScreen} />
@@ -33,8 +31,11 @@ export default function Navigator() {
             <Stack.Screen name='ToDo' component={ToDoScreen} />
             <Stack.Screen name='Login' component={LoginScreen} />
             <Stack.Screen name='Register' component={RegisterScreen} />
+            <Stack.Screen name='Neurosense' component={NeurosenseScreen} />
+            <Stack.Screen name='Hands2' component={HandsScreen2} />
+            <Stack.Screen name='Hands3' component={HandsScreen3} />
+            <Stack.Screen name='timePick' component={TimePC} />
+            <Stack.Screen name='moodBoard' component={MoodBoard} />
           </Stack.Navigator>
-        </NavigationContainer>
-      </CredentialsContext.Provider>
     );
   }

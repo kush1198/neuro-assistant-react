@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 const ToDoTask = (props) => {
-
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
         <View style={styles.square}></View>
-        <Text style={styles.itemText}>{props.text}</Text>
+        <Text style={styles.itemText}>{props.arr.item}</Text>
       </View>
       <View style={styles.circular}></View>
     </View>
