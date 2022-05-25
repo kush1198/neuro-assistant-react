@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, Icon, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import { View, Text } from 'react-native-web';
 import AddMoodButton from './src/components/AnimatedButton';
-export const CredentialsContext = React.createContext();
 
 // read : https://ibjects.medium.com/the-simplest-implementation-of-context-api-in-react-native-94f749187873
 // Screens
@@ -21,15 +20,8 @@ const registerName = "Register";
 const Tab = createBottomTabNavigator();
 
 function MainContainer() {
-    const [user, setUser] = useState('temp');
-    const [pass, setPass] = useState('temp');
-    const users = {'username': user, 'setterU': setUser, 'password':pass,'setterP':setPass}
+
     return (
-        <CredentialsContext.Provider value={users}>
-        {/* <View style={{flex:1,alignItems:'center'}}>
-            <AddMoodButton style={{bottom:10}}></AddMoodButton>
-        </View> */}
-            <NavigationContainer>
                 <Tab.Navigator
                     initialRouteName={homeName}
                     screenOptions={({ route }) => ({
@@ -56,8 +48,8 @@ function MainContainer() {
                     inactiveTintColor: 'grey',
                     labelStyle: { paddingBottom: 10, fontSize: 10 },
                     style: { padding: 10, height: 70},
-                    headerShown: false
-                    }}>
+                    }}
+                    options={{ headerShown: false }}>
                     
                     <Tab.Screen 
                         name={homeName}
@@ -89,8 +81,6 @@ function MainContainer() {
                     />
 
                 </Tab.Navigator>
-            </NavigationContainer>
-        </CredentialsContext.Provider>
     );
 }
 

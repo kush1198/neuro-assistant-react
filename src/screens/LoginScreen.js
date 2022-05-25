@@ -1,10 +1,8 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useEffect, useState, useContext } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { CredentialsContext } from '../../tabNavigator';
+import { CredentialsContext } from '../../starter';
 import { auth,db } from '../../Firebase/firebase';
-import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
-import { collection, doc, setDoc } from 'firebase/firestore';
 
 export const handleErrors = async (response) => {
     if (!response.ok) {
@@ -78,6 +76,7 @@ container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: "#004E60"
 },
 inputContainer: {
     width: '80%'
@@ -96,7 +95,7 @@ buttonContainer: {
     marginTop: 40,
 },
 button: {
-    backgroundColor: '#0782F9',
+    backgroundColor: '#31C4F3',
     width: '100%',
     padding: 15,
     borderRadius: 10,
@@ -105,7 +104,7 @@ button: {
 buttonOutline: {
     backgroundColor: 'white',
     marginTop: 5,
-    borderColor: '#0782F9',
+    borderColor: '#31C4F3',
     borderWidth: 2,
 },
 buttonText: {

@@ -37,6 +37,7 @@ const RegisterScreen = () => {
                 setEmail('');
                 setPassword('');
                 setError('');
+                navigation.navigate('Login')
             })
           .catch((err) => {
             setError(err.message);

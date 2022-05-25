@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
 import ToDoTask from '../components/ToDoTask';
-import { CredentialsContext } from '../../tabNavigator';
+import { CredentialsContext } from '../../starter';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { v4 as uuidv4 } from "uuid";
 import { auth,db } from '../../Firebase/firebase';

@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-import Navigator from './route';
-import MainContainer from './tabNavigator';
-
+import Starter from './starter';
 function App() {
     return (
-      MainContainer()
+      Starter()
   );
 };
 
