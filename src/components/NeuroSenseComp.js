@@ -37,11 +37,11 @@ export default NeuroScreenComp = ({title, nextScreen,gif,repeat,text}) => {
                             <View style={styles.popularTitlesWrapper}>
                                 <View style={[styles.flexRowTimer,{justifyContent: 'space-between'}]}> 
                                     <Text style={styles.popularTitlesTitle}>
-                                    {title}
+                                      {title}
                                     </Text>
                                     <View style={[{borderWidth: 1, borderColor:colors.NA_L_blue, padding:7, backgroundColor:colors.NA_text_blue,  borderRadius: 13, overflow: "hidden",marginRight:15}]}>
                                     <TouchableOpacity style={[{ alignSelf: 'center', backgroundColor:colors.NA_text_blue}]}
-                                        onPress={() => navigation.navigate({nextScreen})}>
+                                        onPress={() => navigation.navigate(nextScreen)}>
                                         <Text style={[{color:'white', fontWeight:'700'}]}>NEXT</Text>
                                     </TouchableOpacity>
                                     </View>
@@ -65,7 +65,7 @@ export default NeuroScreenComp = ({title, nextScreen,gif,repeat,text}) => {
                             <View style={ styles.bullet }>
                             <Text>{'\u2022' + " "}</Text>
                             </View>
-                            <View style={[{ flex : 1, marginLeft: 25, paddingRight: 20 }]}>
+                            <View style={[{ flex : 1, marginLeft: 25, paddingRight: 20, marginBottom:20 }]}>
                                 {
                                     text.map((item) => (
                                         <Text style = {styles.marginT}>{item}</Text>
@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   popularTitle: {
-    fontFamily: 'Montserrat-Bold',
     fontSize: 16,
   },
   popularCardWrapper: {
@@ -115,7 +114,6 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   popularTitlesTitle: {
-    fontFamily: 'Montserrat-SemiBold',
     fontSize: 14,
     color: colors.NA_text_blue,
     fontWeight: "700",
@@ -123,7 +121,6 @@ const styles = StyleSheet.create({
     lineHeight: 24
   },
   popularTitlesWeight: {
-    fontFamily: 'Montserrat-Medium',
     fontSize: 12,
     color: colors.NA_text_blue,
     marginTop: 5,
@@ -142,7 +139,6 @@ const styles = StyleSheet.create({
   },
   InstructionsText:{
     color: colors.dark_blue,
-    fontFamily: "Montserrat",
     fontWeight: "800"
   },
   flexRowTimer :{

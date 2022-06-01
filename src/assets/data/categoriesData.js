@@ -4,7 +4,7 @@ const categoriesData = [
     image: require('../images/bloodS.png'),
     title: 'Blood Sugar Journal',
     selected: true,
-    comp:''
+    comp:'GraphScreen'
   },
   {
     id: '2',
@@ -18,7 +18,7 @@ const categoriesData = [
     image: require('../images/Mood_Board_Icon.png'),
     title: 'Mood Board',
     selected: false,
-    comp:''
+    comp:'moodBoard'
 
   },
   {
@@ -26,7 +26,7 @@ const categoriesData = [
     image: require('../images/Neuro-sense_icon.png'),
     title: 'Neuro Sense',
     selected: false,
-    comp:''
+    comp:'Neurosense'
 
   },
   

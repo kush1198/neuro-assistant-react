@@ -56,50 +56,14 @@ const HomeScreen = ({ navigation }) => {
             />
           </View>
         </View>
-        <Text style={styles.text}>Hi there!</Text>
-        <Button
-          onPress={() => navigation.navigate('Components')}
-          title="Go to Components Demo"
-        />
-        <Button
-          onPress={() => navigation.navigate('Counter')}
-          title="Go to Counter"
-        />
-        <Button
-          title="Go to List Demo"
-          onPress={() => navigation.navigate('List')}
-        />
-        <Button
-          title="Go to Image Demo"
-          onPress={() => navigation.navigate('Image')}
-        />
-        <Button
-          title="Go to Color Screen"
-          onPress={() => navigation.navigate('Color')}
-        />
-        <Button
-          title="Go to ToDo Screen"
-          onPress={() => navigation.navigate('ToDo')}
-        />
-        <Button
-          title="Go to Login Screen"
-          onPress={() => navigation.navigate('Login')}
-        />
-        <Button
-          title="Go to NeuroSense Screen"
-          onPress={() => navigation.navigate('Neurosense')}
-        />
-        <Button
-          title="Go to TimePicker Screen"
-          onPress={() => navigation.navigate('timePick')}
-        />
-        <Button
-          title="Go to MoodBoard Screen"
-          onPress={() => navigation.navigate('moodBoard')}
-        />
-        <View style={{flex:1,alignItems:'center'}}>
-              <AddMoodButton style={{bottom:100}}></AddMoodButton>
+        <View style = {{flex: 1, alignItem: 'center', flexDirection: "column"}}>
+          <View style = {{padding:1}}><Image source = {require('../assets/images/main-s.png')} style = {{marginLeft: 10}}/></View>
+          <View style = {{padding:20}}><Image source = {require('../assets/images/main-s-aff.png')} style = {{marginLeft: 10}}/></View>
+          <View style = {{padding: 10, marginTop: 50, alignContent: 'center', flex: 1, justifyContent:'center', marginLeft:200, marginBottom: 50}}>
+              <AddMoodButton style={{bottom:100}} navigation={navigation}></AddMoodButton>
         </View>
+        </View>
+
       </ScrollView>
     </View>
   );

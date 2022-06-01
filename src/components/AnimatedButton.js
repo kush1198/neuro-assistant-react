@@ -4,7 +4,7 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 import colors from '../assets/colors/colors';
 
 
-const AddMoodButton = (props) => {
+const AddMoodButton = ({style,navigation}) => {
     const [username, setUsername] = useState("")
     const [moodValue, setMoodValue] = useState(""); 
     const [date, setDate] = useState(new Date());
@@ -104,7 +104,7 @@ const AddMoodButton = (props) => {
     };
 
     return (
-        <View style={[styles.container, props.style]}>
+        <View style={[styles.container, style]}>
             
             <TouchableWithoutFeedback 
                 onPress={() => {
@@ -116,6 +116,7 @@ const AddMoodButton = (props) => {
             
             <TouchableWithoutFeedback 
                 onPress={() => {
+                    navigation.navigate('MoodRegister1')
                 }}>
                 <Animated.Image style={[styles.button, styles.secondary, anxiousStyle]}
                 source={require("../assets/images/add_mood.png")}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { CredentialsContext } from '../../tabNavigator';
+import { CredentialsContext } from '../../starter';
 import { MonthDateYearField } from 'react-native-datefield';
  import { auth,db } from '../../Firebase/firebase';
 import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
@@ -31,7 +31,8 @@ const RegisterScreen = () => {
             setDoc(doc(db, "users", cred.user.uid), {
                 Name: username,
                 Email: email,
-                Password: password
+                Password: password,
+                averageMood: 2.9
             }).then(()=>{
                 setUsername('');
                 setEmail('');

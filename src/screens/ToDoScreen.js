@@ -103,7 +103,7 @@ const ToDoScreen = () => {
         >
   
         <View style={styles.tasksWrapper}>
-          <Text style={styles.sectionTitle}>Today's tasks for {creds.username} with password: {creds.password}</Text>
+          <Text style={styles.sectionTitle}>TodoList</Text>
           <View style={styles.items}>
             {
               taskItems.map((todo) => {
@@ -148,7 +148,8 @@ const styles = StyleSheet.create({
     },
     sectionTitle: {
       fontSize: 24,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      color: 'black',
     },
     items: {
       marginTop: 30,

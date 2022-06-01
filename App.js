@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
+import { LogBox } from "react-native"
 import Starter from './starter';
+
 function App() {
-    return (
+  LogBox.ignoreAllLogs(true)
+  return (
       Starter()
   );
 };
